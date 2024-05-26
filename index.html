@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Data Processor</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Order Data Processor</h1>
+        <div class="input-container">
+            <textarea id="orderData" rows="10" cols="50"></textarea><br>
+            <label for="delimiter">Delimiter:</label>
+            <input type="text" id="delimiter" value="|">
+            <button onclick="processOrderData()">Process</button>
+        </div>
+        <h2>Processing Result</h2>
+        <pre id="result"></pre>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
