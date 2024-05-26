@@ -27,4 +27,57 @@ function processOrderData() {
     });
 
     document.getElementById('result').innerText = processedLines.join('\n');
+    document.getElementById('copyButton').style.display = 'inline-block'; // Show the copy button
+}
+
+function copyToClipboard() {
+    const resultElement = document.getElementById('result');
+    const text = resultElement.innerText;
+
+    if (!navigator.clipboard) {
+        // Clipboard API not available
+        fallbackCopyTextToClipboard(text);
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(function() {
+        showNotification('Copied to clipboard successfully!');
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.position = 'fixed';
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        const successful = document.execCommand('copy');
+        const msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Fallback: Copying text command was ' + msg);
+        showNotification('Copied to clipboard successfully!');
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+    }
+
+    document.body.removeChild(textArea);
+}
+
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    notification.innerText = message;
+    notification.style.display = 'block';
+
+    setTimeout(function() {
+        notification.style.display = 'none';
+    }, 3000);  // Hide notification after 3 seconds
 }

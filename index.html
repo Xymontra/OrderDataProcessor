@@ -16,6 +16,8 @@
             <button onclick="processOrderData()">Process</button>
         </div>
         <h2>Processing Result</h2>
+        <button id="copyButton" onclick="copyToClipboard()" style="display: none;">Copy to Clipboard</button>
+        <div id="notification" class="notification"></div>
         <pre id="result"></pre>
     </div>
     <script src="js/script.js"></script>

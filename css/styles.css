@@ -27,7 +27,7 @@ textarea {
     width: 100%;
     max-width: 800px;
     margin: 10px 0;
-    padding: 0;
+    padding: 0px;
     border: none;
     border-radius: 5px;
     background-color: #3c4047;
@@ -71,4 +71,13 @@ pre {
     margin: 20px auto;
     white-space: pre-wrap;
     word-wrap: break-word;
+}
+
+.notification {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
 }
