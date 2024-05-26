@@ -57,3 +57,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 If you have any questions or suggestions, feel free to reach out to me at contact@xymontra.com.
+
+## Status
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3865bb38-00a2-4d0c-938a-3391d3b1617b/deploy-status)](https://orderdataprocessor.netlify.app/)
