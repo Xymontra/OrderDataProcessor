@@ -11,13 +11,30 @@
         <h1>Order Data Processor</h1>
         <div class="input-container">
             <textarea id="orderData" rows="10" cols="50"></textarea><br>
-            <label for="delimiter">Delimiter:</label>
-            <input type="text" id="delimiter" value="|">
+            <label for="useServiceNumber" class="toggle-label">Use Service Number:</label>
+            <label class="switch">
+                <input type="checkbox" id="useServiceNumber" onchange="toggleServiceNumber()">
+                <span class="slider round"></span>
+            </label><br>
+            <div id="serviceNumberContainer" style="display: none;">
+                <label for="serviceNumber">Service Number (optional):</label>
+                <input type="text" id="serviceNumber"><br>
+            </div>
+            <label for="useDelimiter" class="toggle-label">Change Delimiter:</label>
+            <label class="switch">
+                <input type="checkbox" id="useDelimiter" onchange="toggleDelimiter()">
+                <span class="slider round"></span>
+            </label><br>
+            <div id="delimiterContainer" style="display: none;">
+                <label for="delimiter">Delimiter:</label>
+                <input type="text" id="delimiter" value="|"><br>
+            </div>
             <button onclick="processOrderData()">Process</button>
         </div>
         <h2>Processing Result</h2>
         <button id="copyButton" onclick="copyToClipboard()" style="display: none;">Copy to Clipboard</button>
         <div id="notification" class="notification"></div>
+        <div id="error" class="error"></div>
         <pre id="result"></pre>
     </div>
     <script src="js/script.js"></script>

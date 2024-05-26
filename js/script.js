@@ -1,8 +1,17 @@
 function processOrderData() {
-    let orderData = document.getElementById('orderData').value;
-    let delimiter = document.getElementById('delimiter').value || '|';
+    let orderData = document.getElementById('orderData').value.trim();
+    let delimiter = document.getElementById('useDelimiter').checked ? document.getElementById('delimiter').value : '|';
+    let useServiceNumber = document.getElementById('useServiceNumber').checked;
+    let serviceNumber = document.getElementById('serviceNumber').value.trim();
     let lines = orderData.split('\n');
     let processedLines = [];
+
+    clearMessages();  // Clear previous messages
+
+    if (!orderData) {
+        showError('No order data provided.');
+        return;
+    }
 
     lines.forEach(line => {
         let fields = line.split('\t');
@@ -23,8 +32,18 @@ function processOrderData() {
             order_quantity = '0';  // No numbers, set order quantity to 0
         }
 
-        processedLines.push(`${delimiter} ${link_or_username} ${delimiter} ${order_quantity}`);
+        let processedLine = `${delimiter} ${link_or_username} ${delimiter} ${order_quantity}`;
+        if (useServiceNumber && serviceNumber) {
+            processedLine = `${serviceNumber} ${processedLine}`;
+        }
+
+        processedLines.push(processedLine);
     });
+
+    if (processedLines.length === 0) {
+        showError('No valid order data found.');
+        return;
+    }
 
     document.getElementById('result').innerText = processedLines.join('\n');
     document.getElementById('copyButton').style.display = 'inline-block'; // Show the copy button
@@ -80,4 +99,41 @@ function showNotification(message) {
     setTimeout(function() {
         notification.style.display = 'none';
     }, 3000);  // Hide notification after 3 seconds
+}
+
+function showError(message) {
+    const error = document.getElementById('error');
+    error.innerText = message;
+    error.style.display = 'block';
+
+    setTimeout(function() {
+        error.style.display = 'none';
+    }, 3000);  // Hide error after 3 seconds
+}
+
+function clearMessages() {
+    const notification = document.getElementById('notification');
+    const error = document.getElementById('error');
+    notification.style.display = 'none';
+    error.style.display = 'none';
+}
+
+function toggleServiceNumber() {
+    const useServiceNumber = document.getElementById('useServiceNumber').checked;
+    const serviceNumberContainer = document.getElementById('serviceNumberContainer');
+    if (useServiceNumber) {
+        serviceNumberContainer.style.display = 'block';
+    } else {
+        serviceNumberContainer.style.display = 'none';
+    }
+}
+
+function toggleDelimiter() {
+    const useDelimiter = document.getElementById('useDelimiter').checked;
+    const delimiterContainer = document.getElementById('delimiterContainer');
+    if (useDelimiter) {
+        delimiterContainer.style.display = 'block';
+    } else {
+        delimiterContainer.style.display = 'none';
+    }
 }
